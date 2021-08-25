@@ -1,6 +1,8 @@
 
 from functions import parser
 from functions import geocode_search
+import wikipedia
+
 
 
 import urllib.request
@@ -16,6 +18,14 @@ def test_http_return(monkeypatch):
 
     monkeypatch.setattr(urllib.request, 'urlopen', mockreturn)
     assert geocode_search.geocodesearch('emmanuel macron quelle adresse') == results
+
+def test_wiki(monkeypatch):
+    results = ['Emmanuel Macron', 'Brigitte Macron', 'Opinion polling on the Emmanuel Macron presidency', 'La République En Marche!', '2017 French presidential election', 'Macron', 'Protests against Emmanuel Macron', 'Jean-Michel Macron', 'Murder of Samuel Paty', 'Laurence Auzière-Jourdan']
+    def mockreturn(requests):
+        return BytesIO(json.dumps(results).encode())
+
+    monkeypatch.setattr(urllib.request, 'urlopen', mockreturn)
+    assert len(wikipedia.search('emmanuel macron')) == len(results)
 
 
 def test_parser():

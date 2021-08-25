@@ -15,8 +15,19 @@ def searchword(str) :
 
     finalresearch = parser.parser(str)
 
+    list_words_random_answer = ['bonjour', 'ça va', 'hey', 'salut', 'grandpy']
+
+    response ={'result':'grandpy Bot te salue'}
+    json_data_salutation = json.dumps(response, ensure_ascii=False)
+    for i in list_words_random_answer:
+        if i.__contains__(finalresearch):
+            return json_data_salutation
+
+
+
     # placeid_response = response['candidates'][0]['place_id']
     # Geocoding an address
+
 
 
 
