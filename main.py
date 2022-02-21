@@ -17,7 +17,9 @@ def index():
 
 @app.route('/processing', methods=['POST'])
 def processing():
+    print('working now')
     print(request.form)
+    print(request.form.get('question1'))
     message = request.form.get('question1')
     wikisearch = search.searchword(message)
     return jsonify(wikisearch)
